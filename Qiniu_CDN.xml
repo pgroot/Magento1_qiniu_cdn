@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Qiniu_CDN>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Qiniu_CDN>
+    </modules>
+</config>

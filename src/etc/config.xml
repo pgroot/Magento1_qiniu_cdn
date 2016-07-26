@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Qiniu_CDN>
+            <version>0.0.1</version>
+        </Qiniu_CDN>
+    </modules>
+
+    <global>
+        <models>
+            <cdn>
+                <class>Qiniu_CDN_Model</class>
+            </cdn>
+
+        </models>
+        <helpers>
+            <cdn>
+                <class>Qiniu_CDN_Helper</class>
+            </cdn>
+
+            <catalog>
+                <rewrite>
+                    <image>Qiniu_CDN_Helper_Mage_Catalog_Image</image>
+                </rewrite>
+            </catalog>
+        </helpers>
+        <events>
+            <!-- Requires M. >= 1.7 -->
+            <catalog_product_media_save_before>
+                <observers>
+                    <cdn_upload>
+                        <type>singleton</type>
+                        <class>Qiniu_CDN_Model_Observer</class>
+                        <method>upload</method>
+                    </cdn_upload>
+                </observers>
+            </catalog_product_media_save_before>
+            <catalog_category_save_after>
+                <observers>
+                    <cdn_upload>
+                        <type>singleton</type>
+                        <class>Qiniu_CDN_Model_Category</class>
+                        <method>upload</method>
+                    </cdn_upload>
+                </observers>
+            </catalog_category_save_after>
+        </events>
+    </global>
+
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <cdn>
+                                            <title>Qiniu CDN</title>
+                                        </cdn>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+    <default>
+        <cdn>
+            <settings>
+                <cache_time>15552000</cache_time>
+            </settings>
+        </cdn>
+    </default>
+</config>
