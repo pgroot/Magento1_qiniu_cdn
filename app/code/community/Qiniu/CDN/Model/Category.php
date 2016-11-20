@@ -5,7 +5,8 @@
  * Date: 16/7/26
  * Time: 00:31
  */
-require dirname(__FILE__).'/../sdk/autoload.php';
+
+require Mage::getBaseDir('lib').'/Qiniu/functions.php';
 
 class Qiniu_CDN_Model_Category {
 
@@ -34,9 +35,9 @@ class Qiniu_CDN_Model_Category {
         //todo use category config
         $config = Mage::getSingleton('catalog/product_media_config');
 
-        $auth = new Qiniu\Auth($accessKey, $secretKey);
+        $auth = new \Qiniu\Auth($accessKey, $secretKey);
         $token = $auth->uploadToken($bucket);
-        $uploadMgr = new Qiniu\Storage\UploadManager();
+        $uploadMgr = new \Qiniu\Storage\UploadManager();
 
         $file = str_replace('product','category',$config->getMediaPath($image));
 

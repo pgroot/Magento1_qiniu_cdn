@@ -5,6 +5,8 @@
  * Date: 2016/7/25
  * Time: 22:13
  */
+require Mage::getBaseDir('lib').'/Qiniu/functions.php';
+
 class Qiniu_CDN_Helper_Mage_Catalog_Image extends Mage_Catalog_Helper_Image
 {
 

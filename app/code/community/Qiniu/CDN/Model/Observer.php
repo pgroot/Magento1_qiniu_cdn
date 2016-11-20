@@ -4,7 +4,8 @@
  * Date: 2016/7/25
  * Time: 15:13
  */
-require dirname(__FILE__).'/../sdk/autoload.php';
+require Mage::getBaseDir('lib').'/Qiniu/functions.php';
+
 
 class Qiniu_CDN_Model_Observer {
 
@@ -35,9 +36,9 @@ class Qiniu_CDN_Model_Observer {
 
         $config = Mage::getSingleton('catalog/product_media_config');
 
-        $auth = new Qiniu\Auth($accessKey, $secretKey);
+        $auth = new \Qiniu\Auth($accessKey, $secretKey);
         $token = $auth->uploadToken($bucket);
-        $uploadMgr = new Qiniu\Storage\UploadManager();
+        $uploadMgr = new \Qiniu\Storage\UploadManager();
 
         foreach ($images['images'] as &$image) {
             if (isset($image['value_id']))

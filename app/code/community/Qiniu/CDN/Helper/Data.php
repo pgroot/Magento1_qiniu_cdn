@@ -5,6 +5,8 @@
  * Date: 2016/7/26
  * Time: 00:13
  */
+require Mage::getBaseDir('lib').'/Qiniu/functions.php';
+
 class Qiniu_CDN_Helper_Data extends Mage_Core_Helper_Abstract
 {
     private $_prefix = null;
@@ -29,9 +31,9 @@ class Qiniu_CDN_Helper_Data extends Mage_Core_Helper_Abstract
     {
         $config = $this->_getConfig($website);
 
-        $auth = new Qiniu\Auth($config['accessKey'], $config['secretKey']);
+        $auth = new \Qiniu\Auth($config['accessKey'], $config['secretKey']);
         $token = $auth->uploadToken($config['bucket']);
-        $uploadMgr = new Qiniu\Storage\UploadManager();
+        $uploadMgr = new \Qiniu\Storage\UploadManager();
 
         list($ret, $err) = $uploadMgr->putFile($token, $this->_getObject($path, $size), $from);
 
